@@ -48,6 +48,7 @@ func newCommand(params otelcol.CollectorSettings) *cobra.Command {
 		promEnabledFlag            bool
 		promTargetFlag             []string
 		fromJSONFileFlag           string
+		mcpAddrFlag                string
 	)
 
 	rootCmd := &cobra.Command{
@@ -69,6 +70,7 @@ func newCommand(params otelcol.CollectorSettings) *cobra.Command {
 				EnableProm:   promEnabledFlag,
 				FromJSONFile: fromJSONFileFlag,
 				PromTarget:   promTargetFlag,
+				MCPAddr:      mcpAddrFlag,
 			}
 
 			if err := cfg.Validate(); err != nil {
@@ -104,5 +106,6 @@ func newCommand(params otelcol.CollectorSettings) *cobra.Command {
 	rootCmd.Flags().BoolVar(&promEnabledFlag, "enable-prom", false, "Enable the prometheus receiver")
 	rootCmd.Flags().StringVar(&fromJSONFileFlag, "from-json-file", "", "The JSON file path exported by JSON exporter")
 	rootCmd.Flags().StringArrayVar(&promTargetFlag, "prom-target", []string{}, `The target endpoints for the prometheus receiver (--prom-target "localhost:9000" --prom-target "other-host:9000")`)
+	rootCmd.Flags().StringVar(&mcpAddrFlag, "mcp-addr", "", "Address to bind the MCP server (disabled if empty)")
 	return rootCmd
 }

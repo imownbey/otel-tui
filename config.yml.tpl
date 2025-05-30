@@ -36,6 +36,9 @@ processors:
 exporters:
   tui:
     from_json_file: {{ if .FromJSONFile }}true{{else}}false{{end}}
+{{- if .MCPAddr}}
+    mcp_addr: "{{ .MCPAddr }}"
+{{- end}}
 service:
   pipelines:
     traces:
