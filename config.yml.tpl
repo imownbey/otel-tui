@@ -36,6 +36,7 @@ processors:
 exporters:
   tui:
     from_json_file: {{ if .FromJSONFile }}true{{else}}false{{end}}
+    mcp_port: {{ .MCPPort }}
 service:
   pipelines:
     traces:

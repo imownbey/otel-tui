@@ -19,12 +19,12 @@ func TestNewTuiExporter(t *testing.T) {
 	}{
 		{
 			name:                "with json file",
-			config:              &Config{FromJSONFile: true},
+			config:              &Config{FromJSONFile: true, MCPPort: 0},
 			wantInitialInterval: time.Second,
 		},
 		{
 			name:                "without json file",
-			config:              &Config{FromJSONFile: false},
+			config:              &Config{FromJSONFile: false, MCPPort: 0},
 			wantInitialInterval: 0,
 		},
 	}
@@ -35,6 +35,7 @@ func TestNewTuiExporter(t *testing.T) {
 			assert.NotNil(t, exporter)
 			assert.NotNil(t, exporter.app)
 			assert.NotNil(t, exporter.app.Store())
+			assert.NotNil(t, exporter.server)
 		})
 	}
 }
@@ -64,7 +65,7 @@ func TestPushLogs(t *testing.T) {
 }
 
 func TestStartAndShutdown(t *testing.T) {
-	exporter := newTuiExporter(&Config{})
+	exporter := newTuiExporter(&Config{MCPPort: 0})
 
 	err := exporter.Start(context.Background(), nil)
 	assert.NoError(t, err)

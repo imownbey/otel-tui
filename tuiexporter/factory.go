@@ -25,7 +25,7 @@ func NewFactory() exporter.Factory {
 }
 
 func createDefaultConfig() component.Config {
-	return &Config{}
+	return &Config{MCPPort: 8600}
 }
 
 func createTraces(ctx context.Context, set exporter.Settings, cfg component.Config) (exporter.Traces, error) {

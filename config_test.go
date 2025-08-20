@@ -19,6 +19,7 @@ func TestConfigRenderYml(t *testing.T) {
 			"localhost:9000",
 			"other-host:9000",
 		},
+		MCPPort: 8600,
 	}
 	want := `yaml:
 receivers:
@@ -51,6 +52,7 @@ processors:
 exporters:
   tui:
     from_json_file: true
+    mcp_port: 8600
 service:
   pipelines:
     traces:
@@ -89,6 +91,7 @@ func TestConfigRenderYmlMinimum(t *testing.T) {
 		OTLPGRPCPort: 4317,
 		EnableZipkin: false,
 		EnableProm:   false,
+		MCPPort:      8600,
 	}
 	want := `yaml:
 receivers:
@@ -106,6 +109,7 @@ processors:
 exporters:
   tui:
     from_json_file: false
+    mcp_port: 8600
 service:
   pipelines:
     traces:

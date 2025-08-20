@@ -20,6 +20,7 @@ type Config struct {
 	EnableProm   bool
 	FromJSONFile string
 	PromTarget   []string
+	MCPPort      int
 }
 
 func (c *Config) RenderYml() (string, error) {
